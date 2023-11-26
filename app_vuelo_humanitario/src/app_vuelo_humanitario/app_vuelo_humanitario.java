@@ -13,29 +13,29 @@ import javax.swing.JOptionPane;
  */
 public class app_vuelo_humanitario extends javax.swing.JFrame {
 
-    Stack<Integer> niños = new Stack<>();
-    Stack<Integer> jovenes = new Stack<>();
-    Stack<Integer> adultos = new Stack<>();
+    Stack<String> niños = new Stack<>();
+    Stack<String> jovenes = new Stack<>();
+    Stack<String> adultos = new Stack<>();
     
     
     public app_vuelo_humanitario() {
         initComponents();
     }
 
-protected void Fnt_AgregarDato(int edades) {
+protected void Fnt_AgregarDato(String nombre) {
     if (txt_nombre.getText().equals("") || txt_edad.getText().equals("")) {
         JOptionPane.showMessageDialog(null, "Debe diligenciar la información");
     } else {
         int edad = Integer.parseInt(txt_edad.getText());
 
         if (edad >= 60 && edad <= 80) {
-            adultos.push(edades);
+            adultos.push(nombre);
             JOptionPane.showMessageDialog(null, "El Nombre: " + txt_nombre.getText() + " ha sido registrado con éxito");
         } else if (edad >= 15 && edad <= 25) {
-            jovenes.push(edades);
+            jovenes.push(nombre);
             JOptionPane.showMessageDialog(null, "El Nombre: " + txt_nombre.getText() + " ha sido registrado con éxito");
         } else if (edad >= 2 && edad <= 12) {
-            niños.push(edades);
+            niños.push(nombre);
             JOptionPane.showMessageDialog(null, "El Nombre: " + txt_nombre.getText() + " ha sido registrado con éxito");
         } else {
             JOptionPane.showMessageDialog(null, "La edad: " + edad + " NO es permitida");
@@ -236,20 +236,17 @@ protected void Fnt_AgregarDato(int edades) {
                                     .addComponent(jLabel8)
                                     .addComponent(btn_mostrar_joven, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(jLabel5)
-                                .addGap(163, 163, 163)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_edad_remover, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(btn_remover)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel5)
+                        .addGap(163, 163, 163)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_edad_remover, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_remover)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -274,10 +271,11 @@ protected void Fnt_AgregarDato(int edades) {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_mostrar_niño1)
-                    .addComponent(btn_mostrar_joven)
-                    .addComponent(btn_mostrar_adulto))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_mostrar_adulto)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_mostrar_niño1)
+                        .addComponent(btn_mostrar_joven)))
                 .addGap(34, 34, 34)
                 .addComponent(jLabel8)
                 .addGap(29, 29, 29)
@@ -317,7 +315,7 @@ protected void Fnt_AgregarDato(int edades) {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
        
-        Fnt_AgregarDato(Integer.parseInt(txt_edad.getText()));
+        Fnt_AgregarDato(txt_nombre.getText());
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -353,14 +351,14 @@ protected void Fnt_AgregarDato(int edades) {
         }
         else
         {
-        JOptionPane.showMessageDialog(null, jovenes);
+        JOptionPane.showMessageDialog(null, adultos);
         }
     }//GEN-LAST:event_btn_mostrar_adultoActionPerformed
 
     private void btn_removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removerActionPerformed
-          int edad = Integer.parseInt(txt_edad.getText());
+          int registro = Integer.parseInt(txt_edad_remover.getText());
 
-        if (edad >= 60 && edad <= 80) {
+        if (registro >= 60 && registro <= 80) {
             if(adultos.empty()){
         
             JOptionPane.showMessageDialog(null, "No hay Registros para remover");
@@ -372,7 +370,7 @@ protected void Fnt_AgregarDato(int edades) {
             }
             
             
-        } else if (edad >= 15 && edad <= 25) {
+        } else if (registro >= 15 && registro <= 25) {
             if(jovenes.empty()){
         
             JOptionPane.showMessageDialog(null, "No hay Registros para remover");
@@ -382,7 +380,7 @@ protected void Fnt_AgregarDato(int edades) {
                 JOptionPane.showMessageDialog(null, "Elemento: " + jovenes.peek() + " Removido con éxito");
                 jovenes.pop();
             }
-        } else if (edad >= 2 && edad <= 12) {
+        } else if (registro >= 2 && registro <= 12) {
             if(niños.empty()){
         
             JOptionPane.showMessageDialog(null, "No hay Registros para remover");
@@ -393,7 +391,7 @@ protected void Fnt_AgregarDato(int edades) {
                 niños.pop();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "La edad: " + edad + " NO es permitida");
+            JOptionPane.showMessageDialog(null, "La edad: " + registro + " NO es permitida");
         }
     }//GEN-LAST:event_btn_removerActionPerformed
 
